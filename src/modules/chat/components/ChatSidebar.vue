@@ -15,17 +15,13 @@
         size="lg"
         :disabled="disabledNewChat"
       >
-        Nuevo chat
+        New chat
       </UButton>
 
       <!-- <span class="text-muted font-medium">Chats</span> -->
 
       <div class="flex flex-col overflow-x-hidden overflow-y-auto">
-        <!-- <UTooltip
-          v-for="(_, index) in Array.from({ length: 20 })"
-          :key="index"
-          :text="`Chat ${index + 1}`"
-        >
+        <UTooltip v-for="chat in chatsQuery.data.value" :key="chat.id" :text="chat.title">
           <UButton
             size="lg"
             variant="ghost"
@@ -33,22 +29,28 @@
             color="primary"
             block
             as="RouterLink"
-            :to="`/${index + 1}`"
+            :to="`/${chat.id}`"
             active-variant="soft"
           >
-            Chat {{ index + 1 }}
+            {{ chat.title }}
           </UButton>
-        </UTooltip> -->
+        </UTooltip>
       </div>
     </div>
   </aside>
 </template>
 
 <script lang="ts" setup>
+import { useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+import { getChatsActions } from '../actions/get-chats';
 
 const router = useRoute();
+const chatsQuery = useQuery({
+  queryKey: ['chats'],
+  queryFn: getChatsActions,
+});
 
 const disabledNewChat = computed(() => router.path === '/');
 </script>

@@ -38,13 +38,12 @@ const emit = defineEmits<{
 const prompt = ref('');
 
 const onPressEnter = (event: KeyboardEvent) => {
-  if (prompt.value.trim().length === 0) return;
-
   if (event.key === 'Enter') {
     if (event.shiftKey) {
       return;
     } else {
       event.preventDefault();
+      if (prompt.value.trim().length === 0) return;
       emit('submit', prompt.value);
 
       prompt.value = '';

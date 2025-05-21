@@ -17,7 +17,7 @@ export const chatRoutes: RouteRecordRaw[] = [
       {
         path: '/:chatId',
         name: 'chat',
-        component: () => import('@/modules/chat/views/NewChatView.vue'),
+        component: () => import('@/modules/chat/views/ChatView.vue'),
       },
     ],
   },
