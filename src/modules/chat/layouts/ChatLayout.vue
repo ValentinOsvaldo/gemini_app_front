@@ -4,7 +4,11 @@
 
     <main class="flex flex-col w-full mx-auto p-4">
       <ChatNavbar />
-      <RouterView />
+      <router-view v-slot="{ Component, route }">
+        <transition>
+          <component :is="Component" :key="route.path" />
+        </transition>
+      </router-view>
     </main>
   </div>
 </template>

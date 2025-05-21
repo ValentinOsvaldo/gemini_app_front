@@ -1,7 +1,11 @@
 <template>
   <UToaster>
     <UApp>
-      <RouterView />
+      <router-view v-slot="{ Component }">
+        <transition name="fade">
+          <component :is="Component" />
+        </transition>
+      </router-view>
       <VueQueryDevtools button-position="bottom-left" />
     </UApp>
   </UToaster>

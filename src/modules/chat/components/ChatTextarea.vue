@@ -20,7 +20,7 @@
           size="lg"
           color="neutral"
           variant="ghost"
-          :disabled="prompt.length === 0"
+          :disabled="prompt.length === 0 || pending"
           @click="$emit('submit', prompt)"
         />
       </UTooltip>
@@ -30,6 +30,12 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+
+interface Props {
+  pending: boolean;
+}
+
+const props = defineProps<Props>();
 
 const emit = defineEmits<{
   (e: 'submit', prompt: string): void;
@@ -43,7 +49,7 @@ const onPressEnter = (event: KeyboardEvent) => {
       return;
     } else {
       event.preventDefault();
-      if (prompt.value.trim().length === 0) return;
+      if (prompt.value.trim().length === 0 || props.pending) return;
       emit('submit', prompt.value);
 
       prompt.value = '';
