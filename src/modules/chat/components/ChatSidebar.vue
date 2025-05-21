@@ -3,19 +3,25 @@
     <div class="grid gap-2 mt-2 overflow-auto">
       <UButton
         variant="ghost"
-        class="rounded-full"
+        :class="[
+          'rounded-full',
+          {
+            'text-muted': disabledNewChat,
+          },
+        ]"
         icon="i-lucide-plus"
         as="RouterLink"
         :to="{ name: 'new-chat' }"
         size="lg"
+        :disabled="disabledNewChat"
       >
         Nuevo chat
       </UButton>
 
-      <span class="text-muted font-medium">Chats</span>
+      <!-- <span class="text-muted font-medium">Chats</span> -->
 
       <div class="flex flex-col overflow-x-hidden overflow-y-auto">
-        <UTooltip
+        <!-- <UTooltip
           v-for="(_, index) in Array.from({ length: 20 })"
           :key="index"
           :text="`Chat ${index + 1}`"
@@ -32,8 +38,17 @@
           >
             Chat {{ index + 1 }}
           </UButton>
-        </UTooltip>
+        </UTooltip> -->
       </div>
     </div>
   </aside>
 </template>
+
+<script lang="ts" setup>
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+
+const router = useRoute();
+
+const disabledNewChat = computed(() => router.path === '/');
+</script>
