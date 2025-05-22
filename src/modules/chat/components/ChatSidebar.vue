@@ -69,6 +69,7 @@
 
           <template #trailing>
             <UDropdownMenu
+              class="z-50"
               :items="[
                 {
                   label: 'Delete',
@@ -84,6 +85,7 @@
                 icon="i-lucide-ellipsis-vertical"
                 variant="ghost"
                 color="neutral"
+                class="z-50"
                 :disabled="deleteChatMutation.isPending.value"
                 @click.stop
               />
