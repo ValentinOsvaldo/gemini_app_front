@@ -1,10 +1,10 @@
 <template>
   <div
     :class="[
-      'flex items-center w-full max-w-3/4',
+      'flex flex-1 items-center w-full',
       {
         'justify-end ml-auto': type === From.USER,
-        'justify-start mr-auto': type === From.AI,
+        'justify-stretch mr-auto': type === From.AI,
       },
     ]"
   >
@@ -12,7 +12,7 @@
       :class="[
         'my-4',
         {
-          'bg-accented text-white px-4 py-2 rounded-full': type === From.USER,
+          'bg-accented text-white px-4 py-2 rounded-xl': type === From.USER,
           'text-white prose dark:prose-invert': type === From.AI,
         },
       ]"
