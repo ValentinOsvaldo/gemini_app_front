@@ -1,6 +1,13 @@
 <template>
-  <div class="container mx-auto p-4 min-h-screen flex items-center justify-center">
-    <form class="grid gap-4 w-full max-w-xl" @submit.prevent="onLogin">
+  <div class="container mx-auto p-4 min-h-screen flex flex-col items-center justify-center">
+    <header class="flex items-end justify-end w-full">
+      <ColorModeButton />
+    </header>
+
+    <form
+      class="flex-1 flex flex-col justify-center w-full max-w-xl gap-4"
+      @submit.prevent="onLogin"
+    >
       <h1 class="text-6xl font-medium text-center">VueMini</h1>
       <UInput placeholder="Email" type="email" size="xl" v-model="email" ref="emailInputRef" />
       <UInput
@@ -33,6 +40,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useAuthStore } from '../store/auth.store';
+import ColorModeButton from '@/modules/shared/components/ColorModeButton.vue';
 
 const authStore = useAuthStore();
 const toast = useToast();
