@@ -25,26 +25,28 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { computed, nextTick, ref, watch, watchEffect } from 'vue';
 import type { AxiosError } from 'axios';
+import { useRoute, useRouter } from 'vue-router';
 import { useMutation, useQuery } from '@tanstack/vue-query';
 import ChatMessage from '../components/ChatMessage.vue';
 import ChatTextarea from '../components/ChatTextarea.vue';
+import TypingIndicator from '../components/TypingIndicator.vue';
 import { getMessagesById } from '../actions/get-messages-by-id';
 import {
   generatePromptById,
   type GeneratePromptResponse,
 } from '../actions/generate-prompt-by-chat';
 import { From, type Message } from '../interfaces/message.interface';
-import TypingIndicator from '../components/TypingIndicator.vue';
 
+const router = useRouter();
 const route = useRoute();
+const toast = useToast();
 const chatId = computed(() => route.params.chatId as string);
 const chatContainer = ref<HTMLElement | null>(null);
 const localMessages = ref<Omit<Message, 'id'>[]>([]);
 
-const messagesQuery = useQuery({
+const messagesQuery = useQuery<Message[], AxiosError<{ message: string }>>({
   queryKey: ['messages', chatId],
   queryFn: () => getMessagesById(chatId.value),
 });
@@ -88,5 +90,16 @@ watch(localMessages, async () => {
     top: chatContainer.value.scrollHeight,
     behavior: 'smooth',
   });
+});
+
+watchEffect(() => {
+  if (messagesQuery.isError) {
+    toast.add({
+      title: `Error ${messagesQuery.error.value?.response?.status}`,
+      description: `${messagesQuery.error.value?.response?.data.message}`,
+      color: 'error',
+    });
+    router.replace({ name: 'new-chat' });
+  }
 });
 </script>
