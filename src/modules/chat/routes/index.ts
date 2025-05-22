@@ -1,11 +1,10 @@
-import { isAuthenticatedGuard } from '@/modules/auth/guards/is-authenticated.guard';
 import type { RouteRecordRaw } from 'vue-router';
 
 export const chatRoutes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
-    beforeEnter: [isAuthenticatedGuard],
+    beforeEnter: [],
     redirect: { name: 'new-chat' },
     component: () => import('@/modules/chat/layouts/ChatLayout.vue'),
     children: [

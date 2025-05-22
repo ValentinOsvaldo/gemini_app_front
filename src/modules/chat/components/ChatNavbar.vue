@@ -2,17 +2,15 @@
   <header>
     <nav class="flex items-center justify-between mx-auto px-4">
       <div class="flex flex-row items-center gap-4">
-        <Transition name="fade">
-          <UButton
-            icon="i-lucide-menu"
-            variant="ghost"
-            color="neutral"
-            size="xl"
-            class="rounded-full"
-            @click="toggleSidebar"
-            v-if="!openSidebar"
-          />
-        </Transition>
+        <UButton
+          icon="i-lucide-menu"
+          variant="ghost"
+          color="neutral"
+          size="xl"
+          class="rounded-full"
+          @click="toggleSidebar"
+          v-if="!openSidebar"
+        />
         <h2
           class="font-medium text-xl bg-gradient-to-br from-red-500 to-purple-500 bg-clip-text text-transparent"
         >
