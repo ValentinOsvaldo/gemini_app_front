@@ -9,6 +9,7 @@
       placeholder="Ask something to gemini"
       class="w-full p-2"
       v-model="prompt"
+      :maxrows="5"
       @keydown.enter="onPressEnter"
     />
 

@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 
-const openSidebar = ref(true);
+const openSidebar = ref(false);
 
 export const useSidebar = () => {
   const toggleSidebar = () => {
