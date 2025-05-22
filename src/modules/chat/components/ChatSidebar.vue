@@ -1,5 +1,23 @@
 <template>
-  <aside class="w-full max-w-[300px] bg-elevated/25 p-2 min-h-screen overflow-hidden flex flex-col">
+  <aside
+    :class="[
+      'w-full bg-elevated min-h-screen overflow-hidden flex flex-col transition-all duration-300 fixed lg:relative z-50',
+      {
+        'max-w-[300px] p-2': openSidebar,
+        'max-w-0': !openSidebar,
+      },
+    ]"
+  >
+    <div class="py-3 px-2">
+      <UButton
+        icon="i-lucide-menu"
+        variant="ghost"
+        color="neutral"
+        size="xl"
+        class="rounded-full"
+        @click="toggleSidebar"
+      />
+    </div>
     <div class="grid gap-2 mt-2 overflow-auto">
       <UButton
         variant="ghost"
@@ -75,17 +93,28 @@
       </div>
     </div>
   </aside>
+  <Teleport to="body">
+    <transition name="fade">
+      <div
+        class="fixed bg-black/25 backdrop-blur-xs lg:hidden z-40 inset-0"
+        @click="toggleSidebar"
+        v-show="openSidebar"
+      ></div>
+    </transition>
+  </Teleport>
 </template>
 
 <script lang="ts" setup>
-import { useMutation, useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { useMutation, useQuery } from '@tanstack/vue-query';
 import { getChatsActions } from '../actions/get-chats';
 import { deleteChatAction } from '../actions/delete-chat.action';
+import { useSidebar } from '../composition/useSidebar';
 
 const router = useRouter();
 const route = useRoute();
+const { openSidebar, toggleSidebar } = useSidebar();
 
 const toast = useToast();
 
