@@ -69,7 +69,6 @@
 
           <template #trailing>
             <UDropdownMenu
-              class="z-50"
               :items="[
                 {
                   label: 'Delete',
@@ -80,12 +79,14 @@
                   },
                 },
               ]"
+              :ui="{
+                content: 'z-50',
+              }"
             >
               <UButton
                 icon="i-lucide-ellipsis-vertical"
                 variant="ghost"
                 color="neutral"
-                class="z-50"
                 :disabled="deleteChatMutation.isPending.value"
                 @click.stop
               />
