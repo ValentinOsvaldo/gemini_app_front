@@ -1,7 +1,11 @@
 <template>
   <header>
     <nav class="flex items-center justify-between container mx-auto px-4 py-2">
-      <h2 class="text-primary-400 font-medium text-xl">Gemini</h2>
+      <h2
+        class="font-medium text-xl bg-gradient-to-br from-red-500 to-purple-500 bg-clip-text text-transparent"
+      >
+        Gemini
+      </h2>
 
       <UDropdownMenu :items="items" :content="{ align: 'start' }">
         <UAvatar size="xl" :alt="authStore.user?.name" />

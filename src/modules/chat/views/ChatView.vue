@@ -4,8 +4,8 @@
       <UIcon name="i-lucide-loader" class="size-10" />
     </div>
   </div>
-  <div class="flex flex-col flex-1 overflow-auto" v-else>
-    <section class="flex items-center flex-col gap-2 flex-1 overflow-auto" ref="chatContainer">
+  <div class="flex flex-col flex-1 overflow-x-hidden" v-else>
+    <section class="flex items-center flex-col gap-2 flex-1 overflow-x-hidden" ref="chatContainer">
       <div class="max-w-4xl w-full mx-auto p-4">
         <ChatMessage
           v-for="message in messagesQuery.data.value"
@@ -93,7 +93,7 @@ watch(localMessages, async () => {
 });
 
 watchEffect(() => {
-  if (messagesQuery.isError) {
+  if (messagesQuery.isError.value) {
     toast.add({
       title: `Error ${messagesQuery.error.value?.response?.status}`,
       description: `${messagesQuery.error.value?.response?.data.message}`,

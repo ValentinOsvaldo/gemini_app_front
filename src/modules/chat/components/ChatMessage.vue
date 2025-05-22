@@ -1,23 +1,24 @@
 <template>
   <div
     :class="[
-      'flex flex-1 items-center w-full',
+      'flex flex-col w-full mb-4',
       {
-        'justify-end ml-auto': type === From.USER,
-        'justify-stretch mr-auto': type === From.AI,
+        'items-end': type === From.USER,
+        'items-start w-full': type === From.AI,
       },
     ]"
   >
     <div
-      :class="[
-        'my-4',
-        {
-          'bg-accented text-white px-4 py-2 rounded-xl': type === From.USER,
-          'text-white prose dark:prose-invert': type === From.AI,
-        },
-      ]"
+      :class="['flex flex-col prose dark:prose-invert text-left w-full max-w-4/5 flex-1']"
       v-html="contentToHTML"
+      v-if="type === From.AI"
     ></div>
+
+    <div v-else class="bg-accented rounded-xl overflow-x-hidden max-w-3/4">
+      <div class="whitespace-pre-wrap px-4 py-2">
+        {{ content }}
+      </div>
+    </div>
   </div>
 </template>
 

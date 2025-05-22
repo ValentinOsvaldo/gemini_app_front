@@ -102,6 +102,10 @@ const handleDeleteChat = (chatId: string) => {
   deleteChatMutation.mutate(chatId, {
     onSuccess: () => {
       chatsQuery.refetch();
+
+      router.push({
+        name: 'new-chat',
+      });
     },
     onError: () => {
       toast.add({
