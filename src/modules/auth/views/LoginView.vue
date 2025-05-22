@@ -8,7 +8,11 @@
       class="flex-1 flex flex-col justify-center w-full max-w-xl gap-4"
       @submit.prevent="onLogin"
     >
-      <h1 class="text-6xl font-medium text-center">VueMini</h1>
+      <h1
+        class="text-6xl font-medium text-center bg-gradient-to-br from-red-500 to-purple-500 bg-clip-text text-transparent"
+      >
+        VueMini
+      </h1>
       <UInput placeholder="Email" type="email" size="xl" v-model="email" ref="emailInputRef" />
       <UInput
         v-model="password"
