@@ -33,6 +33,11 @@ authStore.$subscribe(
       router.replace({ name: 'home' });
       return;
     }
+
+    if (state.authStatus === AuthStatus.Unauthenticated) {
+      router.replace({ name: 'login' });
+      return;
+    }
   },
   {
     immediate: true,
